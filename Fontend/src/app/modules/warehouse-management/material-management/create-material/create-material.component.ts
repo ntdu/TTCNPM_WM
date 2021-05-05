@@ -101,6 +101,7 @@ export class CreateMaterialComponent implements OnInit {
     }
     
     else {
+      this.source['material_id'] = this.source['id'];
       this.materialManagementService.httpPost('updateMaterial', this.source, (response) => {
         if (response.code == 200) {
           this.toastrService.showToast('success', 'Thành công!', '');
