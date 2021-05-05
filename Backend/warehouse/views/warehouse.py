@@ -100,7 +100,7 @@ def updateMaterial(request):
         unit = form['unit']
         price = form['price']
 
-        updated_material = Material.objects.filter(is_deleted=False, id=material_id)
+        updated_material = Material.objects.filter(is_deleted=False, id=material_id).first()
         updated_material.code = code
         updated_material.name = name
         updated_material.description = description
