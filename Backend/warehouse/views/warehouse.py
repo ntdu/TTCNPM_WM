@@ -49,7 +49,7 @@ def getMaterial(request):
             'description',
             'unit',
             'price',
-        ).first())
+        ))
         
         return ApiHelper.Response_ok(material)
     except Exception as e:
