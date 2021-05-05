@@ -124,7 +124,7 @@ def deleteMaterial(request):
         form =  ApiHelper.getData(request)
         material_id = form['material_id'] 
         
-        deleted_material = Material.objects.filter(is_deleted=False, id=material_id)
+        deleted_material = Material.objects.filter(is_deleted=False, id=material_id).first()
         deleted_material.is_deleted = True
         deleted_material.save()
 
