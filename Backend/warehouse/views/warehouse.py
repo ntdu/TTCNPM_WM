@@ -35,3 +35,21 @@ def listMaterial(request):
         return ApiHelper.Response_error()
 
 
+@api_view(['GET'])
+@authentication_classes([BasicAuthentication])
+@permission_classes([IsAuthenticated])
+def getMaterial(request):  
+    try:
+        material_id = request.GET.get('material_id')
+        material = list(Material.objects.filter(is_deleted=False).values(
+            'code',
+            'name',
+            'description',
+            'unit',
+            'price',
+        ).first())
+        
+        return ApiHelper.Response_ok(material)
+    except Exception as e:
+        print(e)
+        return ApiHelper.Response_error()

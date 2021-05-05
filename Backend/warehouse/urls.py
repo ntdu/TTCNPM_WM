@@ -5,4 +5,5 @@ from . import views
 app_name = 'warehouse'
 urlpatterns = [
   path('list-material', views.listMaterial , name='listMaterial'),
+  path('get-material', views.getMaterial , name='getMaterial'),
 ]
