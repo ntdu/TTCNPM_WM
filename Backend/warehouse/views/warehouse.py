@@ -53,3 +53,32 @@ def getMaterial(request):
     except Exception as e:
         print(e)
         return ApiHelper.Response_error()
+
+
+@api_view(['POST'])
+@authentication_classes([BasicAuthentication])
+@permission_classes([IsAuthenticated])
+def createMaterial(request):  
+    try:
+        form =  ApiHelper.getData(request)
+        
+        code = form['code'] 
+        name = form['name']
+        description = form['description']
+        unit = form['unit']
+        price = form['price']
+
+        created_material = Material(
+            code = code,
+            name = name,
+            description = description,
+            unit = unit,
+            price = price,
+            created_by = request.user
+        )
+        created_material.save()
+
+        return ApiHelper.Response_ok(created_material.id)
+    except Exception as e:
+        print(e)
+        return ApiHelper.Response_error()
