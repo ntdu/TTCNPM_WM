@@ -91,7 +91,6 @@ export class ListMaterialComponent implements OnInit {
     this.materialManagementService.httpGet('listMaterial', (response) => {
       if (response.code == 200) {
         this.source = response.data;
-        console.log(this.source);
         for(let i = 0; i < this.source.length; i ++ ){
           this.source[i].sort_order = i + 1;
         }
@@ -105,15 +104,15 @@ export class ListMaterialComponent implements OnInit {
   }
 
   editCustomer(event: any) {
-    this.dialogService.open(CreateMaterialComponent, {
-      context: {
-        material_id: event.data.id,
-      },
-      closeOnBackdropClick: true
-    }).onClose.subscribe(data => {
+    // this.dialogService.open(CreateMaterialComponent, {
+    //   context: {
+    //     material_id: event.data.id,
+    //   },
+    //   closeOnBackdropClick: true
+    // }).onClose.subscribe(data => {
       
-      this.listMaterial();
-    });
+    //   this.listMaterial();
+    // });
   }
   
   createMaterial() {
@@ -128,21 +127,21 @@ export class ListMaterialComponent implements OnInit {
   }
 
   deleteCustomer(event: any) {
-    this.loading = true;
-    let body = {
-      id: event.data.id
-    }
-    console.log("abc");
-    this.materialManagementService.httpPost('deleteMaterial', body, (response) => {
-    if (response.code == 200) {
-      this.source = this.source.filter(item => item.id !== event.data.id);
-      this.toastrService.showToast('success', 'Thành công!', '');
-    }
-    else {
-      this.toastrService.showToast('danger', 'Lỗi!', response.data);
-    }
-    }, () => {
-      this.loading = false;
-    })
+    // this.loading = true;
+    // let body = {
+    //   id: event.data.id
+    // }
+    // console.log("abc");
+    // this.materialManagementService.httpPost('deleteMaterial', body, (response) => {
+    // if (response.code == 200) {
+    //   this.source = this.source.filter(item => item.id !== event.data.id);
+    //   this.toastrService.showToast('success', 'Thành công!', '');
+    // }
+    // else {
+    //   this.toastrService.showToast('danger', 'Lỗi!', response.data);
+    // }
+    // }, () => {
+    //   this.loading = false;
+    // })
   }
 }
