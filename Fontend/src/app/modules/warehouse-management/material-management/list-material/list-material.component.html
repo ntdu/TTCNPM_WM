@@ -1,0 +1,12 @@
+<nb-card>
+ 
+  <nb-card-body>
+    <p>
+      <button nbButton status="primary" (click)="createMaterial()">
+        Thêm sản phẩm
+      </button>
+    </p>
+    <ng2-smart-table [settings]="settings" [source]="source" (edit)="editCustomer($event)" (delete)="deleteCustomer($event)">
+    </ng2-smart-table>   
+  </nb-card-body>
+</nb-card>

@@ -1,0 +1,12 @@
+<nb-card>
+ 
+  <nb-card-body>
+    <p>
+      <button nbButton status="primary" (click)="createCustomer()">
+        Thêm tài khoản
+      </button>
+    </p>
+    <ng2-smart-table [settings]="settings" [source]="source" (edit)="editCustomer($event)" (delete)="deleteCustomer($event)">
+    </ng2-smart-table>   
+  </nb-card-body>
+</nb-card>

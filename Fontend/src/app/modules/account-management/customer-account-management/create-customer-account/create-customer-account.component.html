@@ -1,0 +1,102 @@
+<nb-card [nbSpinner]="loading">
+    <nb-card-header> 
+        <span *ngIf="!phone">Thêm</span>
+        <span *ngIf="phone">Cập nhật</span>
+        tài khoản
+    </nb-card-header>
+    <nb-card-body>        
+        <form (ngSubmit)="onSubmit()" #form="ngForm" aria-labelledby="title">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="label" for="input-last_name">Họ:</label>
+                        <input nbInput fullWidth [(ngModel)]="source.last_name" #name="ngModel" name="last_name" 
+                        id="input-last_name" placeholder="họ" [required]="true" autocomplete="off">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="label" for="input-branch">Tên:</label>
+                        <input nbInput fullWidth [(ngModel)]="source.first_name" #name="ngModel" name="first_name"
+                            id="input-first_name" placeholder="tên" [required]="true" autocomplete="off">       
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div *ngIf="!phone" class="col-sm-6">
+                    <div class="form-group">
+                        <label class="label" for="input-phone_number">Số điện thoại:</label>
+                        <input nbInput fullWidth [(ngModel)]="source.phone_number" #name="ngModel" name="phone_number" 
+                        id="input-phone_number" placeholder="số điện thoại" [required]="true" autocomplete="off">
+                    </div>
+                </div>
+                <div *ngIf="!phone" class="col-sm-6">
+                    <div class="form-group">
+                        <label class="label" for="input-branch">Mật khẩu:</label>
+                        <input nbInput fullWidth [(ngModel)]="source.password" #name="ngModel" name="password"
+                            id="input-password" placeholder="mật khẩu" [required]="true" autocomplete="off">       
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                    <label class="label" for="input-female">Giới tính:</label>
+                        <nb-select placeholder="giới tính" [(selected)]="source.female" fullWidth>
+                            <nb-option *ngFor="let item of listGender" [value]="item.id">{{item.text}}
+                            </nb-option>
+                        </nb-select>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="label" for="input-branch">Ngày sinh:</label>
+                        <input nbInput fullWidth [(ngModel)]="source.date_of_birth" #name="ngModel" name="date_of_birth"
+                            id="input-date_of_birth" placeholder="ngày sinh" [required]="true" [nbDatepicker]="formpicker" autocomplete="off">   
+                        <nb-datepicker #formpicker></nb-datepicker>    
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="label" for="input-branch">Email:</label>
+                        <input nbInput fullWidth [(ngModel)]="source.email" #name="ngModel" name="bank_owner"
+                            id="input-email" placeholder="địa chỉ email" [required]="true" autocomplete="off">       
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="label" for="input-address">Địa chỉ:</label>
+                        <input nbInput fullWidth [(ngModel)]="source.address" #name="ngModel" name="address" 
+                        id="input-address" placeholder="địa chỉ" [required]="true" autocomplete="off">
+                    </div>
+                </div>
+
+                <!-- <div class="col-sm-6">
+                    <div class="form-group">
+                    <label class="label" for="input-status">Trạng thái:</label>
+                        <nb-select placeholder="trạng thái" [(selected)]="source.status" fullWidth>
+                            <nb-option *ngFor="let item of listStatus" [value]="item.id">{{item.text}}
+                            </nb-option>
+                        </nb-select>
+                    </div>
+                </div> -->
+            </div>
+
+            <div class="buttons-row">
+                <button type="button" nbButton shape="rectangle" status="danger" (click)="cancel()" style="margin-right: 10px;">
+                    Thoát
+                </button>
+                <button type="submit" nbButton status="success" [disabled]="!form.valid" [class.btn-pulse]="submitted">
+                    Lưu lại
+                </button>
+            </div>
+        </form>
+    </nb-card-body>
+</nb-card>
