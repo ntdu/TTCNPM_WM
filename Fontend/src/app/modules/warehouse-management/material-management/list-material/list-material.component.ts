@@ -43,14 +43,14 @@ export class ListMaterialComponent implements OnInit {
       name: {
         title: 'Tên sản phẩm',
         type: 'string',
-        width: '15%',
+        width: '20%',
         sort: true,
         filter: true
       },
       description: {
         title: 'Mô tả',
         type: 'string',
-        width: '15%',
+        width: '25%',
         sort: true,
         filter: true
       },
@@ -127,21 +127,20 @@ export class ListMaterialComponent implements OnInit {
   }
 
   deleteCustomer(event: any) {
-    // this.loading = true;
-    // let body = {
-    //   id: event.data.id
-    // }
-    // console.log("abc");
-    // this.materialManagementService.httpPost('deleteMaterial', body, (response) => {
-    // if (response.code == 200) {
-    //   this.source = this.source.filter(item => item.id !== event.data.id);
-    //   this.toastrService.showToast('success', 'Thành công!', '');
-    // }
-    // else {
-    //   this.toastrService.showToast('danger', 'Lỗi!', response.data);
-    // }
-    // }, () => {
-    //   this.loading = false;
-    // })
+    this.loading = true;
+    let body = {
+      material_id: event.data.id
+    }
+    this.materialManagementService.httpPost('deleteMaterial', body, (response) => {
+    if (response.code == 200) {
+      this.source = this.source.filter(item => item.id !== event.data.id);
+      this.toastrService.showToast('success', 'Thành công!', '');
+    }
+    else {
+      this.toastrService.showToast('danger', 'Lỗi!', response.data);
+    }
+    }, () => {
+      this.loading = false;
+    })
   }
 }
