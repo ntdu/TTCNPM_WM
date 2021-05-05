@@ -112,3 +112,21 @@ def updateMaterial(request):
     except Exception as e:
         print(e)
         return ApiHelper.Response_error()
+
+
+@api_view(['POST'])
+@authentication_classes([BasicAuthentication])
+@permission_classes([IsAuthenticated])
+def deleteMaterial(request):  
+    try:
+        form =  ApiHelper.getData(request)
+        material_id = form['material_id'] 
+        
+        deleted_material = Material.objects.filter(is_deleted=False, id=material_id)
+        deleted_material.is_deleted = True
+        deleted_material.save()
+
+        return ApiHelper.Response_ok(deleted_material.id)
+    except Exception as e:
+        print(e)
+        return ApiHelper.Response_error()

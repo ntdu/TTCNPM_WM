@@ -8,4 +8,5 @@ urlpatterns = [
   path('get-material', views.getMaterial , name='getMaterial'),
   path('create-material', views.createMaterial , name='createMaterial'),
   path('update-material', views.updateMaterial , name='updateMaterial'),
+  path('delete-material', views.deleteMaterial , name='deleteMaterial'),
 ]
