@@ -116,14 +116,14 @@ export class ListMaterialComponent implements OnInit {
   }
   
   createMaterial() {
-    // this.dialogService.open(CreateMaterialComponent, {
-    //   context: {
-    //     material_id: 0,
-    //   },
-    //   closeOnBackdropClick: true
-    // }).onClose.subscribe(data => {
-    //   this.listMaterial();
-    // });
+    this.dialogService.open(CreateMaterialComponent, {
+      context: {
+        material_id: 0,
+      },
+      closeOnBackdropClick: true
+    }).onClose.subscribe(data => {
+      this.listMaterial();
+    });
   }
 
   deleteCustomer(event: any) {
