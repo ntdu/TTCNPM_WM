@@ -22,6 +22,7 @@ from warehouse.models import Material
 def listMaterial(request):  
     try:
         list_material = list(Material.objects.filter(is_deleted=False).values(
+            'id',
             'code',
             'name',
             'description',
@@ -42,6 +43,7 @@ def getMaterial(request):
     try:
         material_id = request.GET.get('material_id')
         material = list(Material.objects.filter(is_deleted=False).values(
+            'id',
             'code',
             'name',
             'description',
