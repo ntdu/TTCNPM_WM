@@ -82,3 +82,33 @@ def createMaterial(request):
     except Exception as e:
         print(e)
         return ApiHelper.Response_error()
+
+
+@api_view(['POST'])
+@authentication_classes([BasicAuthentication])
+@permission_classes([IsAuthenticated])
+def updateMaterial(request):  
+    try:
+        form =  ApiHelper.getData(request)
+
+        material_id = form['material_id'] 
+        code = form['code'] 
+        name = form['name']
+        description = form['description']
+        unit = form['unit']
+        price = form['price']
+
+        updated_material = Material.objects.filter(is_deleted=False, id=material_id)
+        updated_material.code = code
+        updated_material.name = name
+        updated_material.description = description
+        updated_material.unit = unit
+        updated_material.price = price
+        updated_material.last_updated_date = timezone.now()
+        updated_material.last_updated_by = request.user
+        updated_material.save()
+
+        return ApiHelper.Response_ok(updated_material.id)
+    except Exception as e:
+        print(e)
+        return ApiHelper.Response_error()
