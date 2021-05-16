@@ -1,0 +1,8 @@
+<ng-select2
+    [options]="optionsSelect"
+    [(ngModel)]="status_id"
+    #name="ngModel"
+    name="status"
+    [data]="listStatus"
+    (valueChanged)="onChangeStatus($event)">		
+</ng-select2>
