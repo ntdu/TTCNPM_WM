@@ -146,16 +146,16 @@ def pushInventory(request):
         material = Material.objects.get(code = code, name = name)
         amount = form['amount']
 
-        created_material = Inventory(
+        pushed_inventory = Inventory(
             material = material,
             amount = amount,
             price = material.price,
             total_money = int(material.price) * int(amount),
             created_by = request.user
         )
-        created_material.save()
+        pushed_inventory.save()
 
-        return ApiHelper.Response_ok(created_material.id)
+        return ApiHelper.Response_ok(pushed_inventory.id)
     except Exception as e:
         print(e)
         return ApiHelper.Response_error()
