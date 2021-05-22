@@ -9,4 +9,5 @@ urlpatterns = [
   path('create-material', views.createMaterial , name='createMaterial'),
   path('update-material', views.updateMaterial , name='updateMaterial'),
   path('delete-material', views.deleteMaterial , name='deleteMaterial'),
+  path('push-inventory', views.pushInventory , name='pushInventory'),
 ]
