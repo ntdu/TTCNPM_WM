@@ -159,3 +159,23 @@ def pushInventory(request):
     except Exception as e:
         print(e)
         return ApiHelper.Response_error()
+
+
+@api_view(['POST'])
+@authentication_classes([BasicAuthentication])
+@permission_classes([IsAuthenticated])
+def deleteInventory(request):  
+    try:
+        form =  ApiHelper.getData(request)
+        code = form['material_code'] 
+        name = form['material_name']
+        
+        delete_inventory = Material.objects.get(code = code, name = name)
+        delete_inventory = Material.objects.filter(is_deleted=False, material = delete_inventory).first()
+        delete_inventory.is_deleted = True
+        delete_inventory.save()
+
+        return ApiHelper.Response_ok(delete_inventory.id)
+    except Exception as e:
+        print(e)
+        return ApiHelper.Response_error()
