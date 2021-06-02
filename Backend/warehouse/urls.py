@@ -10,4 +10,6 @@ urlpatterns = [
   path('update-material', views.updateMaterial , name='updateMaterial'),
   path('delete-material', views.deleteMaterial , name='deleteMaterial'),
   path('push-inventory', views.pushInventory , name='pushInventory'),
+  path('delete-inventory', views.deleteInventory , name='deleteInventory'),
+
 ]
