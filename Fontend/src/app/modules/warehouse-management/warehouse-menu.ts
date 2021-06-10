@@ -12,6 +12,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Danh sách sản phẩm',
         link: 'material',
+      },
+      {
+        title: 'Nhập kho',
+        link: 'goods-receipt',
       }
     ],
   },
