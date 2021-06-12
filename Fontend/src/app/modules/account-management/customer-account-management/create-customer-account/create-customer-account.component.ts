@@ -17,7 +17,7 @@ export class CreateCustomerAccountComponent implements OnInit {
 
   // @Input() account_id: number
   @Input() phone: number
-
+  @Input() id: number
   //ng-select2
   listBankCompany: any = [];
   optionsSelect: any;
@@ -59,7 +59,7 @@ export class CreateCustomerAccountComponent implements OnInit {
       height: "100%"
     }
 
-    if (this.phone){
+    if (this.phone) {
       this.getUser();
     }
   }
@@ -75,6 +75,7 @@ export class CreateCustomerAccountComponent implements OnInit {
       if (response.code == 200) {
         this.source = response.data[0];
         this.source.female = this.source.female.toString()
+        console.log(this)
       }
       else {
         this.toastrService.showToast('danger', 'Lỗi!', response.data);
@@ -89,7 +90,7 @@ export class CreateCustomerAccountComponent implements OnInit {
     this.loading = true;
     this.source.sort_order = 0;
 
-    if (typeof(this.source.date_of_birth) != "string") {
+    if (typeof (this.source.date_of_birth) != "string") {
       this.source.date_of_birth = this.dateFormatWithPad(this.source.date_of_birth);
     }
     if (!this.phone) {
@@ -101,11 +102,11 @@ export class CreateCustomerAccountComponent implements OnInit {
         else {
           this.toastrService.showToast('danger', 'Lỗi!', response.data);
         }
-        }, () => {
-          this.loading = false;
+      }, () => {
+        this.loading = false;
       })
     }
-    
+
     else {
       this.source.female = (this.source.female === 'true');
       this.customerAccountManagementService.httpPost('updateUser', this.source, (response) => {
@@ -116,8 +117,8 @@ export class CreateCustomerAccountComponent implements OnInit {
         else {
           this.toastrService.showToast('danger', 'Lỗi!', response.data);
         }
-        }, () => {
-          this.loading = false;
+      }, () => {
+        this.loading = false;
       })
     }
 
@@ -125,12 +126,12 @@ export class CreateCustomerAccountComponent implements OnInit {
 
   dateFormatWithPad(date: Date) {
     let dd = String(date.getDate()).padStart(2, '0');
-    let mm = String(date.getMonth() + 1).padStart(2, '0'); 
-    let yyyy = date. getFullYear();
+    let mm = String(date.getMonth() + 1).padStart(2, '0');
+    let yyyy = date.getFullYear();
     return yyyy + '-' + mm + '-' + dd;
   }
 
-  cancel(data=0) {
+  cancel(data = 0) {
     this.ref.close(data);
   }
 
