@@ -21,11 +21,13 @@ import {
 } from '@nebular/theme';
 import { InventoryManagementRoutedModule, InventoryManagementRoutingModule } from './inventory-management-routing.module'
 import { GoodsReceiptComponent } from './goods-receipt/goods-receipt.component';
+import { GoodsListComponent } from './goods-list/goods-list.component';
 
 @NgModule({
   declarations: [
     ...InventoryManagementRoutedModule,
-    GoodsReceiptComponent
+    GoodsReceiptComponent,
+    GoodsListComponent
   ],
   imports: [
     CommonModule,

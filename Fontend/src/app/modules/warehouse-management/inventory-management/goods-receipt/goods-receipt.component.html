@@ -9,37 +9,47 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label class="label" for="input-code">Mã sản phẩm:</label>
-                        <input nbInput fullWidth [(ngModel)]="source.code" #name="ngModel" name="code" 
+                        <input nbInput fullWidth [(ngModel)]="source.code" #name="ngModel" name="material-code" 
                         id="input-code" placeholder="mã sản phẩm" [required]="true" autocomplete="off">
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label class="label" for="input-branch">Tên sản phẩm:</label>
-                        <input nbInput fullWidth [(ngModel)]="source.name" #name="ngModel" name="name"
+                        <input nbInput fullWidth [(ngModel)]="source.name" #name="ngModel" name="material-name"
                             id="input-name" placeholder="tên sản phẩm" [required]="true" autocomplete="off">       
                     </div>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-sm-6">
+                <!-- <div class="col-sm-6">
                     <div class="form-group">
                         <label class="label" for="input-description">Mô tả:</label>
                         <input nbInput fullWidth [(ngModel)]="source.description" #name="ngModel" name="description" 
                         id="input-description" placeholder="mã sản phẩm" [required]="true" autocomplete="off">
                     </div>
-                </div>
+                </div> -->
+                
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label class="label" for="input-branch">Đơn vị tính:</label>
-                        <input nbInput fullWidth [(ngModel)]="source.unit" #name="ngModel" name="unit"
-                            id="input-unit" placeholder="đơn vị tính" [required]="true" autocomplete="off">       
+                        <label class="label" for="input-branch">Số lượng:</label>
+                        <input nbInput fullWidth [(ngModel)]="source.amount" #name="ngModel" name="amount"
+                            id="input-amount" placeholder="số lượng" [required]="true" autocomplete="off">       
                     </div>
                 </div>
+
+                <!-- might use this -->
+                <!-- <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="label" for="input-price">Giá thành:</label>
+                        <input nbInput fullWidth [(ngModel)]="source.price" #name="ngModel" name="price" 
+                        id="input-price" type="number" min="1" placeholder="giá thành" [required]="true" autocomplete="off">
+                    </div>
+                </div> -->
             </div>
 
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label class="label" for="input-price">Giá thành:</label>
@@ -47,7 +57,7 @@
                         id="input-price" type="number" min="1" placeholder="giá thành" [required]="true" autocomplete="off">
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <div class="buttons-row">
                 <button type="submit" nbButton status="success" [disabled]="!form.valid" [class.btn-pulse]="submitted">
