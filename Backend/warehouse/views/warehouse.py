@@ -141,13 +141,14 @@ def pushInventory(request):
         form =  ApiHelper.getData(request)
         print(request)
 
-        code = form['material_code'] 
-        name = form['material_name']
+        code = form['code'] 
+        name = form['name']
         material = Material.objects.get(code = code, name = name)
         amount = form['amount']
 
         pushed_inventory = Inventory(
             material = material,
+            # name = name,
             amount = amount,
             price = material.price,
             total_money = int(material.price) * int(amount),
@@ -167,11 +168,11 @@ def pushInventory(request):
 def deleteInventory(request):  
     try:
         form =  ApiHelper.getData(request)
-        code = form['material_code'] 
-        name = form['material_name']
+        code = form['code'] 
+        name = form['name']
         
-        delete_inventory = Material.objects.get(code = code, name = name)
-        delete_inventory = Material.objects.filter(is_deleted=False, material = delete_inventory).first()
+        delete_material = Material.objects.get(code = code, name = name)
+        delete_inventory = Inventory.objects.filter(is_deleted=False, material = delete_material).first()
         delete_inventory.is_deleted = True
         delete_inventory.save()
 
