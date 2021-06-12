@@ -9,4 +9,5 @@ urlpatterns = [
   path('delete-customer', views.deleteCustomer , name='deleteCustomer'),
   path('update-customer', views.updateCustomer , name='updateCustomer'),
   path('get-customer', views.getCustomer , name='getCustomer'),
+  path('deactivate-customer', views.deActivateCustomer , name='deActivateCustomer'),
 ]

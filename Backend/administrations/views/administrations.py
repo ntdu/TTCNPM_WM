@@ -167,3 +167,19 @@ def getCustomer(request):
 #     except Exception as e:
 #         print(e)
 #         return ApiHelper.Response_error()
+
+@api_view(['POST'])
+def deActivateCustomer(request):
+    try:
+        form =  ApiHelper.getData(request)
+
+        id =  form['id']
+        
+        customer = Customer.objects.filter(is_deleted=False, id=id).first()
+        customer.is_active = False if customer.is_active else True
+        customer.save()
+
+        return ApiHelper.Response_ok(customer.id)
+    except Exception as e:
+        print(e)
+        return ApiHelper.Response_error()
