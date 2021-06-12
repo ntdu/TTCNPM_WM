@@ -6,9 +6,10 @@ import { ApiClientService } from '../../../config/api-client.service';
 })
 export class CustomerAccountManagementService extends ApiClientService {
   list_api = [
-    { key: 'listUser', link: 'administrations/list-user' },
-    { key: 'getUser', link: 'administrations/get-user' },
-    { key: 'createUser', link: 'administrations/create-user' },
-    { key: 'updateUser', link: 'administrations/update-user' }
+    { key: 'listUser', link: 'admins/list-customer' },
+    { key: 'getUser', link: 'admins/get-customer' },
+    { key: 'createUser', link: 'admins/create-customer' },
+    { key: 'updateUser', link: 'admins/update-customer' },
+    { key: 'deleteUser', link: 'admins/delete-customer' },
   ]
 }

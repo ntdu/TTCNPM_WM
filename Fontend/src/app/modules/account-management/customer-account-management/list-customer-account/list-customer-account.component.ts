@@ -15,16 +15,16 @@ import { CreateCustomerAccountComponent } from '../create-customer-account/creat
 export class ListCustomerComponent implements OnInit {
   constructor(
     private toastrService: ToastrService,
-		private customerAccountManagementService: CustomerAccountManagementService,
+    private customerAccountManagementService: CustomerAccountManagementService,
     private dialogService: NbDialogService,
-	) { }
+  ) { }
 
   loading = false;
   source: any;
 
-	ngOnInit(): void {
+  ngOnInit(): void {
     this.listCustomer();
-	}
+  }
 
   settings = {
     columns: {
@@ -34,6 +34,7 @@ export class ListCustomerComponent implements OnInit {
         filter: false,
         width: '3%',
       },
+
       first_name: {
         title: 'Họ và Tên',
         type: 'string',
@@ -41,6 +42,13 @@ export class ListCustomerComponent implements OnInit {
         sort: true,
         filter: true
       },
+      // account: {
+      //   title: 'Tên tài khoản',
+      //   type: 'string',
+      //   width: '17%',
+      //   sort: true,
+      //   filter: true
+      // },
       phone_number: {
         title: 'Số điện thoại',
         type: 'string',
@@ -48,13 +56,13 @@ export class ListCustomerComponent implements OnInit {
         sort: true,
         filter: true
       },
-      email: {
-        title: 'Email',
-        type: 'string',
-        width: '15%',
-        sort: true,
-        filter: true
-      },
+      // email: {
+      //   title: 'Email',
+      //   type: 'string',
+      //   width: '15%',
+      //   sort: true,
+      //   filter: true
+      // },
       date_of_birth: {
         title: 'Ngày sinh',
         type: 'custom',
@@ -104,7 +112,7 @@ export class ListCustomerComponent implements OnInit {
     }
   };
 
-  listCustomer(){
+  listCustomer() {
     let params = [
       { key: 'offset', value: 1 },
       { key: 'limit', value: 100 }
@@ -112,10 +120,11 @@ export class ListCustomerComponent implements OnInit {
     this.customerAccountManagementService.httpGetWithParams('listUser', params, (response) => {
       if (response.code == 200) {
         this.source = response.data;
-        for(let i = 0; i < this.source.length; i ++ ){
+        for (let i = 0; i < this.source.length; i++) {
           this.source[i].sort_order = i + 1;
-          this.source[i].first_name = this.source[i].last_name +" " + this.source[i].first_name;
+          this.source[i].first_name = this.source[i].last_name + " " + this.source[i].first_name;
         }
+        console.log("res123", response)
       }
       else {
         console.log(response)
@@ -126,6 +135,7 @@ export class ListCustomerComponent implements OnInit {
   }
 
   editCustomer(event: any) {
+    console.log("edit customer")
     this.dialogService.open(CreateCustomerAccountComponent, {
       context: {
         // account_id: this.account_id,
@@ -138,7 +148,7 @@ export class ListCustomerComponent implements OnInit {
       this.listCustomer();
     });
   }
-  
+
   createCustomer() {
     this.dialogService.open(CreateCustomerAccountComponent, {
       context: {
@@ -155,15 +165,15 @@ export class ListCustomerComponent implements OnInit {
     let body = {
       id: event.data.id
     }
-
-    this.customerAccountManagementService.httpPost('deleteCustomer', body, (response) => {
-    if (response.code == 200) {
-      this.source = this.source.filter(item => item.id !== event.data.id);
-      this.toastrService.showToast('success', 'Thành công!', '');
-    }
-    else {
-      this.toastrService.showToast('danger', 'Lỗi!', response.data);
-    }
+    console.log("deleteCustomer", this.customerAccountManagementService)
+    this.customerAccountManagementService.httpPost('deleteUser', body, (response) => {
+      if (response.code == 200) {
+        this.source = this.source.filter(item => item.id !== event.data.id);
+        this.toastrService.showToast('success', 'Thành công!', '');
+      }
+      else {
+        this.toastrService.showToast('danger', 'Lỗi!', response.data);
+      }
     }, () => {
       this.loading = false;
     })
