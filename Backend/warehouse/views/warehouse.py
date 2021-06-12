@@ -171,7 +171,7 @@ def deleteInventory(request):
         code = form['code'] 
         name = form['name']
         
-        delete_material = Material.objects.get(code = code, name = name)
+        delete_material = Material.objects.filter(code = code, name = name).first()
         delete_inventory = Inventory.objects.filter(is_deleted=False, material = delete_material).first()
         delete_inventory.is_deleted = True
         delete_inventory.save()
