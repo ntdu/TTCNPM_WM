@@ -55,7 +55,8 @@ export class SelectEmployeeComponent implements OnInit {
     let body = {
       id: this.rowData.id,
     }
-
+    console.log(this.rowData.id);
+    
     this.customerAccountManagementService.httpPost('deActivateCustomer', body, (response) => {
     if (response.code == 200) {
       this.toastrService.showToast('success', 'Thành công!', '');

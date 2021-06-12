@@ -11,5 +11,6 @@ export class CustomerAccountManagementService extends ApiClientService {
     { key: 'createUser', link: 'admins/create-customer' },
     { key: 'updateUser', link: 'admins/update-customer' },
     { key: 'deleteUser', link: 'admins/delete-customer' },
+    { key: 'deActivateCustomer', link: 'admins/deactivate-customer' },
   ]
 }
