@@ -13,7 +13,7 @@ from rest_framework.authentication import BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 from django.views.decorators.csrf import csrf_exempt
 
-from warehouse.models import Material
+from warehouse.models import Material, Inventory
 
 
 @api_view(['GET'])
@@ -129,6 +129,92 @@ def deleteMaterial(request):
         deleted_material.save()
 
         return ApiHelper.Response_ok(deleted_material.id)
+    except Exception as e:
+        print(e)
+        return ApiHelper.Response_error()
+
+@api_view(['POST'])
+@authentication_classes([BasicAuthentication])
+@permission_classes([IsAuthenticated])
+def pushInventory(request):  
+    try:
+        form =  ApiHelper.getData(request)
+        print(request)
+
+        code = form['material_code'] 
+        name = form['material_name']
+        material = Material.objects.get(code = code, name = name)
+        amount = form['amount']
+
+        pushed_inventory = Inventory(
+            material = material,
+            amount = amount,
+            price = material.price,
+            total_money = int(material.price) * int(amount),
+            created_by = request.user
+        )
+        pushed_inventory.save()
+
+        return ApiHelper.Response_ok(pushed_inventory.id)
+    except Exception as e:
+        print(e)
+        return ApiHelper.Response_error()
+
+
+@api_view(['POST'])
+@authentication_classes([BasicAuthentication])
+@permission_classes([IsAuthenticated])
+def deleteInventory(request):  
+    try:
+        form =  ApiHelper.getData(request)
+        code = form['material_code'] 
+        name = form['material_name']
+        
+        delete_inventory = Material.objects.get(code = code, name = name)
+        delete_inventory = Material.objects.filter(is_deleted=False, material = delete_inventory).first()
+        delete_inventory.is_deleted = True
+        delete_inventory.save()
+
+        return ApiHelper.Response_ok(delete_inventory.id)
+    except Exception as e:
+        print(e)
+        return ApiHelper.Response_error()
+
+
+@api_view(['GET'])
+@authentication_classes([BasicAuthentication])
+@permission_classes([IsAuthenticated])
+def listInventory(request):  
+    try:
+        list_inventory = list(Inventory.objects.filter(is_deleted=False).values(
+            'id',
+            'material',
+            'amount',
+            'price',
+            'total_money',
+        ))
+        
+        return ApiHelper.Response_ok(list_inventory)
+    except Exception as e:
+        print(e)
+        return ApiHelper.Response_error()
+
+
+@api_view(['GET'])
+@authentication_classes([BasicAuthentication])
+@permission_classes([IsAuthenticated])
+def getInventory(request):  
+    try:
+        material_id = request.GET.get('material_id')
+        inventory = list(Inventory.objects.filter(is_deleted=False).values(
+            'id',
+            'material',
+            'amount',
+            'price',
+            'total_money',
+        ))
+        
+        return ApiHelper.Response_ok(inventory)
     except Exception as e:
         print(e)
         return ApiHelper.Response_error()
