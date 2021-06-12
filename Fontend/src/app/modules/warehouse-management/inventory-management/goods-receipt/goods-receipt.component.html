@@ -1,6 +1,8 @@
 <nb-card [nbSpinner]="loading">
     <nb-card-header> 
-        <span>Nhập kho</span>
+        <span *ngIf="!inventory_id">Thêm</span>
+        <span *ngIf="inventory_id">Cập nhật</span>
+        sản phẩm
     </nb-card-header>
 
     <nb-card-body>        
@@ -8,48 +10,27 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label class="label" for="input-code">Mã sản phẩm:</label>
-                        <input nbInput fullWidth [(ngModel)]="source.code" #name="ngModel" name="code" 
-                        id="input-code" placeholder="mã sản phẩm" [required]="true" autocomplete="off">
+                        <label class="label" for="input-code">Sản phẩm:</label>
+                        <nb-select placeholder="sản phẩm" [(selected)]="source.material_id" fullWidth>
+                            <nb-option *ngFor="let item of listMaterial" [value]="item.id">{{item.text}}
+                            </nb-option>
+                        </nb-select>
                     </div>
                 </div>
+                
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label class="label" for="input-branch">Tên sản phẩm:</label>
-                        <input nbInput fullWidth [(ngModel)]="source.name" #name="ngModel" name="name"
-                            id="input-name" placeholder="tên sản phẩm" [required]="true" autocomplete="off">       
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label class="label" for="input-description">Mô tả:</label>
-                        <input nbInput fullWidth [(ngModel)]="source.description" #name="ngModel" name="description" 
-                        id="input-description" placeholder="mã sản phẩm" [required]="true" autocomplete="off">
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label class="label" for="input-branch">Đơn vị tính:</label>
-                        <input nbInput fullWidth [(ngModel)]="source.unit" #name="ngModel" name="unit"
-                            id="input-unit" placeholder="đơn vị tính" [required]="true" autocomplete="off">       
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label class="label" for="input-price">Giá thành:</label>
-                        <input nbInput fullWidth [(ngModel)]="source.price" #name="ngModel" name="price" 
-                        id="input-price" type="number" min="1" placeholder="giá thành" [required]="true" autocomplete="off">
+                        <label class="label" for="input-branch">Số lượng:</label>
+                        <input nbInput fullWidth [(ngModel)]="source.amount" #name="ngModel" name="name"
+                            id="input-amount" type="number" placeholder="số lượng" [required]="true" autocomplete="off">       
                     </div>
                 </div>
             </div>
 
             <div class="buttons-row">
+                <button type="button" nbButton shape="rectangle" status="danger" (click)="cancel()" style="margin-right: 10px;">
+                    Thoát
+                </button>
                 <button type="submit" nbButton status="success" [disabled]="!form.valid" [class.btn-pulse]="submitted">
                     Lưu lại
                 </button>

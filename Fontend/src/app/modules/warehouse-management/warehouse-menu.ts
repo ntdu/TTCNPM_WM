@@ -14,8 +14,8 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: 'material',
       },
       {
-        title: 'Nhập kho',
-        link: 'goods-receipt',
+        title: 'Tồn kho',
+        link: 'list-inventory',
       }
     ],
   },

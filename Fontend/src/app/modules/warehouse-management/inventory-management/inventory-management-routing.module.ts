@@ -1,20 +1,20 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { GoodsReceiptComponent } from './goods-receipt/goods-receipt.component';
+import { ListInventoryComponent } from './list-inventory/list-inventory.component'
 
 export const InventoryManagementRoutedModule = [
-    GoodsReceiptComponent
+    ListInventoryComponent
 ]
 const routes: Routes = [
     {
         path: '',
-        redirectTo: 'goods-receipt',
+        redirectTo: 'list-inventory',
         pathMatch: 'full'
     },
     {
-        path: 'goods-receipt',
-        component: GoodsReceiptComponent,
-    },
+        path: 'list-inventory',
+        component: ListInventoryComponent,
+    }
 ];
 
 @NgModule({

@@ -18,7 +18,7 @@ const routes: Routes = [
           .then(m => m.MaterialManagementModule),
       },
       {
-        path: 'goods-receipt',
+        path: 'list-inventory',
         loadChildren: () => import('./inventory-management/inventory-management.module')
           .then(m => m.InventoryManagementModule),
       }

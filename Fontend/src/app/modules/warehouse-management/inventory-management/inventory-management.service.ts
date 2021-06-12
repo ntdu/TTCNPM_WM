@@ -10,6 +10,10 @@ export class InventoryManagementService extends ApiClientService {
     { key: 'getMaterial', link: 'warehouse/get-material' },
     { key: 'createMaterial', link: 'warehouse/create-material' },
     { key: 'updateMaterial', link: 'warehouse/update-material' },
-    { key: 'deleteMaterial', link: 'warehouse/delete-material' }
+    { key: 'deleteMaterial', link: 'warehouse/delete-material' },
+    { key: 'listInventory', link: 'warehouse/list-inventory' },
+    { key: 'deleteMaterial', link: 'warehouse/delete-material' },
+    { key: 'pushInventory', link: 'warehouse/push-inventory' },
+    // { key: 'deleteMaterial', link: 'warehouse/delete-material' },
   ]
 }
