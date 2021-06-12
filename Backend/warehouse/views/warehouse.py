@@ -139,23 +139,27 @@ def deleteMaterial(request):
 def pushInventory(request):  
     try:
         form =  ApiHelper.getData(request)
-        print(request)
 
-        code = form['material_code'] 
-        name = form['material_name']
-        material = Material.objects.get(code = code, name = name)
+        id = form['material_id'] 
+        material = Material.objects.get(id=id)
         amount = form['amount']
 
-        pushed_inventory = Inventory(
-            material = material,
-            amount = amount,
-            price = material.price,
-            total_money = int(material.price) * int(amount),
-            created_by = request.user
-        )
-        pushed_inventory.save()
+        inventory = Inventory.objects.filter(is_deleted=False, material__id=id).first()
+        if inventory:
+            inventory.amount += amount
+            inventory.total_money += int(material.price) * int(amount)
+            inventory.save()
+        else:
+            pushed_inventory = Inventory(
+                material = material,
+                amount = amount,
+                price = material.price,
+                total_money = int(material.price) * int(amount),
+                created_by = request.user
+            )
+            pushed_inventory.save()             
 
-        return ApiHelper.Response_ok(pushed_inventory.id)
+        return ApiHelper.Response_ok("OK")
     except Exception as e:
         print(e)
         return ApiHelper.Response_error()
@@ -188,7 +192,8 @@ def listInventory(request):
     try:
         list_inventory = list(Inventory.objects.filter(is_deleted=False).values(
             'id',
-            'material',
+            'material__code',
+            'material__name',
             'amount',
             'price',
             'total_money',
