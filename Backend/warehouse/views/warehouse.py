@@ -179,3 +179,42 @@ def deleteInventory(request):
     except Exception as e:
         print(e)
         return ApiHelper.Response_error()
+
+
+@api_view(['GET'])
+@authentication_classes([BasicAuthentication])
+@permission_classes([IsAuthenticated])
+def listInventory(request):  
+    try:
+        list_inventory = list(Inventory.objects.filter(is_deleted=False).values(
+            'id',
+            'material',
+            'amount',
+            'price',
+            'total_money',
+        ))
+        
+        return ApiHelper.Response_ok(list_inventory)
+    except Exception as e:
+        print(e)
+        return ApiHelper.Response_error()
+
+
+@api_view(['GET'])
+@authentication_classes([BasicAuthentication])
+@permission_classes([IsAuthenticated])
+def getInventory(request):  
+    try:
+        material_id = request.GET.get('material_id')
+        inventory = list(Inventory.objects.filter(is_deleted=False).values(
+            'id',
+            'material',
+            'amount',
+            'price',
+            'total_money',
+        ))
+        
+        return ApiHelper.Response_ok(inventory)
+    except Exception as e:
+        print(e)
+        return ApiHelper.Response_error()
